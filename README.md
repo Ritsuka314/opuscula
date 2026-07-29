@@ -8,32 +8,55 @@ compiled documents, publication notes, and web pages. Each writing occupies
 one directory, while the repository root supplies the collection catalogue
 and shared site assets.
 
-## Writings
-
-| No. | Writing | Page | Contents |
-|---:|---|---|---|
-| 001 | [Fixed Points of a Random Permutation](euler-derangement-cloze/) | [Publication page](https://opuscula.ritsuka.moe/euler-derangement-cloze/) | Reproduced English, revised English, and revised Chinese editions |
+The catalogue and publication pages come from shared
+[Eta](https://eta.js.org/) templates. A writing has one record in
+[`src/data/writings.json`](src/data/writings.json); that record produces both
+its catalogue entry and its publication page, so their structure stays
+consistent as the collection grows.
 
 ## Building
 
-If GNU Make is available, build every document in the collection with:
+The site generator requires Node.js 20 or later. Install its pinned dependency
+once:
+
+```sh
+npm ci
+```
+
+Then build every document and regenerate every web page:
 
 ```sh
 make
 ```
 
-To build or clean one writing independently:
+Useful narrower commands are:
 
 ```sh
-make -C euler-derangement-cloze
-make -C euler-derangement-cloze clean
+npm run build                         # regenerate web pages only
+npm run check                         # fail if generated pages are stale
+make -C euler-derangement-cloze       # build one writing
+make -C euler-derangement-cloze clean # clean one writing
 ```
 
-GNU Make is only a convenience wrapper. The three documents can also be built
-by running `latexmk -xelatex` on their `.tex` files from within the writing
-directory; see its [README](euler-derangement-cloze/README.md) for the exact
-commands.
+The root Makefile automatically discovers writing directories that contain a
+Makefile. Individual documents use `latexmk -xelatex`; see each writing's
+README for its exact commands and prerequisites.
 
-The website is plain HTML and CSS and requires no build step. GitHub Pages
-publishes the repository root at `opuscula.ritsuka.moe`; the `CNAME` file
-records that custom domain.
+## Adding a writing
+
+1. Create a URL-safe directory for the writing and give it a Makefile.
+2. Add one record, in numerical order, to
+   [`src/data/writings.json`](src/data/writings.json). Its `slug` must match
+   the directory name.
+3. Run `make`. The generator checks that referenced PDFs and LaTeX sources
+   exist, then regenerates the root catalogue and every publication page.
+4. Review and commit the source, documents, and generated HTML together.
+
+Edit [`src/data/site.json`](src/data/site.json) for collection-wide prose,
+and edit the files under [`src/templates`](src/templates/) for shared
+structure. The root `index.html` and each writing's `index.html` are generated
+files and should not be edited directly.
+
+GitHub Pages serves the committed output without a server-side build. The
+`.nojekyll` and `CNAME` files select static publishing and the
+`opuscula.ritsuka.moe` custom domain.

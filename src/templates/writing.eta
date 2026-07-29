@@ -1,0 +1,84 @@
+<% layout("./base") -%>
+  <main class="publication-main">
+    <nav class="breadcrumbs" aria-label="Breadcrumb">
+      <a href="../"><%= it.site.name %></a><span aria-hidden="true">/</span>Writing <%= it.writing.number %>
+    </nav>
+
+    <article>
+      <header class="publication-hero">
+        <div>
+          <p class="publication-index">OPVSCVLVM · <%= it.writing.number %></p>
+          <p class="publication-meta"><%= it.writing.category %> · <%= it.writing.kind %></p>
+          <h1 class="publication-title"><%= it.writing.title %></h1>
+<% if (it.writing.subtitle) { -%>
+          <p class="publication-subtitle"<% if (it.writing.subtitle.lang) { %> lang="<%= it.writing.subtitle.lang %>"<% } %>><%= it.writing.subtitle.text %></p>
+<% } -%>
+          <p class="publication-deck">
+            <%= it.writing.deck %>
+          </p>
+          <div class="publication-actions">
+<% it.writing.publicationActions.forEach((action) => { -%>
+            <a class="button button-<%= action.kind %>" href="<%= action.href %>"<% if (action.lang) { %> lang="<%= action.lang %>"<% } %>><%= action.label %></a>
+<% }) -%>
+          </div>
+        </div>
+
+        <aside class="publication-aside" aria-label="Publication details">
+<% it.writing.facts.forEach((fact) => { -%>
+          <div class="fact">
+            <span class="fact-label"><%= fact.label %></span>
+            <span class="fact-value"><%= fact.value %></span>
+          </div>
+<% }) -%>
+        </aside>
+      </header>
+
+      <section class="editions" id="editions">
+        <header class="editions-header">
+          <h2><%= it.writing.editionsTitle %></h2>
+          <p>
+            <%= it.writing.editionsIntroduction %>
+          </p>
+        </header>
+
+        <div class="edition-grid">
+<% it.writing.editions.forEach((edition) => { -%>
+          <section class="edition-card"<% if (edition.lang) { %> lang="<%= edition.lang %>"<% } %>>
+            <p class="edition-number"><%= edition.number %></p>
+            <p class="edition-language"><%= edition.language %></p>
+            <h2><%= edition.title %></h2>
+            <p>
+              <%= edition.description %>
+            </p>
+            <div class="edition-actions">
+              <a class="button button-dark" href="<%= edition.pdf %>">PDF</a>
+              <a class="button button-light" href="<%= edition.source %>">LaTeX</a>
+            </div>
+          </section>
+<% }) -%>
+        </div>
+      </section>
+
+      <section class="provenance" id="provenance">
+        <div>
+          <p class="eyebrow"><%= it.writing.editorial.eyebrow %></p>
+          <h2><%= it.writing.editorial.title %></h2>
+        </div>
+        <div class="provenance-copy">
+          <p>
+            <%= it.writing.editorial.introduction %>
+          </p>
+          <p>
+            <%= it.writing.editorial.purpose.before %> <strong><%= it.writing.editorial.purpose.emphasis %></strong>.
+            <%= it.writing.editorial.purpose.after %>
+          </p>
+          <div class="source-callout">
+            <p class="source-title"<% if (it.writing.editorial.source.lang) { %> lang="<%= it.writing.editorial.source.lang %>"<% } %>><%= it.writing.editorial.source.title %></p>
+            <p>
+              <a href="<%= it.writing.editorial.source.url %>"><%= it.writing.editorial.source.linkLabel %></a>
+            </p>
+          </div>
+        </div>
+      </section>
+    </article>
+  </main>

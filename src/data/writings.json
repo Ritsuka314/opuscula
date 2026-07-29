@@ -1,0 +1,110 @@
+[
+  {
+    "number": "001",
+    "slug": "euler-derangement-cloze",
+    "category": "Mathematics",
+    "kind": "Reproduction & revision",
+    "lang": "en",
+    "title": "Fixed Points of a Random Permutation",
+    "subtitle": {
+      "text": "随机排列的不动点",
+      "lang": "zh-Hans"
+    },
+    "summary": "A video-sourced mathematical note presented in three forms: a close English reproduction, a corrected English report, and a revised Chinese report.",
+    "motif": {
+      "left": "n",
+      "arrow": "↦",
+      "right": "!n"
+    },
+    "cardActions": [
+      {
+        "label": "View writing",
+        "kind": "dark",
+        "href": ""
+      },
+      {
+        "label": "Read revised PDF",
+        "kind": "light",
+        "href": "paper-en-revised.pdf"
+      }
+    ],
+    "metaDescription": "A reproduction and corrected bilingual editions of the mathematical note shown in BV1Fh411N71S.",
+    "deck": "A reconstruction of the mathematical note visible in a Bilibili video, accompanied by corrected, self-contained reports in English and Chinese.",
+    "publicationActions": [
+      {
+        "label": "Read revised English",
+        "kind": "dark",
+        "href": "paper-en-revised.pdf"
+      },
+      {
+        "label": "阅读中文修订版",
+        "lang": "zh-Hans",
+        "kind": "light",
+        "href": "paper-zh.pdf"
+      }
+    ],
+    "facts": [
+      {
+        "label": "Collection",
+        "value": "Opuscula, no. 001"
+      },
+      {
+        "label": "Documents",
+        "value": "Three editions · English & Chinese"
+      },
+      {
+        "label": "Formats",
+        "value": "PDF · LaTeX source"
+      },
+      {
+        "label": "Prepared by",
+        "value": "K. Ritsuka"
+      }
+    ],
+    "editionsTitle": "Three editions",
+    "editionsIntroduction": "The reproduction preserves what appeared in the video. The two revised reports repair the mathematics and exposition, and stand on their own.",
+    "editions": [
+      {
+        "number": "I / III",
+        "language": "English · Reproduced",
+        "title": "Source-faithful edition",
+        "description": "A close typesetting of the four visible pages, intentionally preserving their unusual wording, omissions, notation, and induction calculation.",
+        "pdf": "paper-en.pdf",
+        "source": "paper-en.tex"
+      },
+      {
+        "number": "II / III",
+        "language": "English · Revised",
+        "title": "Corrected report",
+        "description": "A self-contained treatment with a precise model, an inclusion–exclusion proof, a unified probability distribution, and an indicator-variable proof of the expectation.",
+        "pdf": "paper-en-revised.pdf",
+        "source": "paper-en-revised.tex"
+      },
+      {
+        "number": "III / III",
+        "language": "中文 · 修订版",
+        "lang": "zh-Hans",
+        "title": "中文修订报告",
+        "description": "与英文修订版内容一致的规范中文报告。该版采用相同的定义、结论与证明，并非对复刻版中不规范措辞的逐字翻译。",
+        "pdf": "paper-zh.pdf",
+        "source": "paper-zh.tex"
+      }
+    ],
+    "editorial": {
+      "eyebrow": "Source & purpose",
+      "title": "Editorial note",
+      "introduction": "This publication is an independent LaTeX reproduction of, and editorial adaptation based on, the paper shown in the Bilibili video linked below. The close reproduction is distinguished from the two corrected reports throughout.",
+      "purpose": {
+        "before": "It was prepared solely for",
+        "emphasis": "entertainment and educational purposes",
+        "after": "It is unofficial, is not presented as an author-approved transcript, and makes no claim of affiliation with the video creator or Bilibili."
+      },
+      "source": {
+        "title": "【日常研究】摆烂小能手掀起的数学问题",
+        "lang": "zh-Hans",
+        "url": "https://www.bilibili.com/video/BV1Fh411N71S",
+        "linkLabel": "Bilibili video BV1Fh411N71S"
+      }
+    }
+  }
+]

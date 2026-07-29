@@ -11,5 +11,8 @@
 # Local visual-regression previews
 .preview-*.png
 
+# Local Node dependencies
+node_modules/
+
 # The local source video is not part of the published repository.
 *.mp4

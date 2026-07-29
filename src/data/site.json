@@ -1,0 +1,31 @@
+{
+  "name": "Opuscula",
+  "owner": "K. Ritsuka",
+  "description": "Recreational and semi-formal writings by K. Ritsuka.",
+  "baseUrl": "https://opuscula.ritsuka.moe",
+  "repositoryUrl": "https://github.com/Ritsuka314/opuscula",
+  "repositoryBranch": "main",
+  "themeColor": "#f2eee5",
+  "era": "MMXXVI",
+  "hero": {
+    "eyebrow": "Recreational & semi-formal writings",
+    "titleLead": "Small works,",
+    "titleEmphasis": "carefully kept.",
+    "introduction": "Notes, reconstructions, and mathematical diversions by",
+    "browseLabel": "Browse the collection"
+  },
+  "catalogue": {
+    "eyebrow": "The collection",
+    "title": "Writings",
+    "description": "Complete texts, source files, and editorial context."
+  },
+  "about": {
+    "eyebrow": "About the name",
+    "title": "Opuscula",
+    "paragraphs": [
+      "<i>Opusculum</i> is Latin for a small work; <i>opuscula</i> is its plural. The name suits pieces that may be modest in extent without being casual in their preparation.",
+      "Every entry preserves its sources and distinguishes reproduction, translation, and revision wherever those differences matter."
+    ]
+  },
+  "footerLabel": "Opuscula · K. Ritsuka"
+}
