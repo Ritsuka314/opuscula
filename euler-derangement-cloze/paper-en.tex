@@ -1,0 +1,184 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[margin=24mm]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{fontspec}
+\usepackage{xeCJK}
+\usepackage{microtype}
+\usepackage[hidelinks]{hyperref}
+
+\setmainfont{Latin Modern Roman}
+\setCJKmainfont[AutoFakeSlant=0.2]{Noto Serif CJK SC}
+\setCJKmonofont{Noto Sans Mono CJK SC}
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.7em}
+\setlength{\jot}{7pt}
+
+\newtheorem{lemma}{Lemma}
+\newtheorem{proposition}{Proposition}
+\newenvironment{paperproof}
+  {\par\noindent\textit{Proof.}\par\smallskip}
+  {\par}
+
+\hypersetup{
+  pdftitle={Fixed Points of a Random Permutation -- Reproduced English},
+  pdfsubject={Unofficial reproduction for entertainment and educational purposes}
+}
+
+\begin{document}
+
+\newcommand{\EditionName}{Reproduced English edition}
+\newcommand{\EditionSummary}{%
+  This edition preserves the text and calculation visible in the source
+  video as closely as the available frames permit.}
+\input{cover-page}
+
+\begin{lemma}
+Consider a permutation of \(n\) elements:
+\[
+  f:\{1,2,\ldots,n\}\longrightarrow\{1,2,\ldots,n\},
+\]
+where \(f\) is bijective. Then the probability of getting the permutation such
+that
+\[
+  f(k)\ne k\bigl(\forall k\in\{1,2,\ldots,n\}\bigr)
+\]
+is
+\[
+  \sum_{i=2}^{n}\frac{(-1)^i}{i!}.
+\]
+And the total number of such \(f\) is
+\[
+  n!\sum_{i=2}^{n}\frac{(-1)^i}{i!}.
+\]
+\end{lemma}
+
+The proof of this lemma is omitted here. Assume \(X\) is a random variable
+referring to how many elements in the permutation are corrected aligned
+(i.e.\ \(X=\) the number of \(k\)'s such that \(f(k)=k\)). Our problem is to
+calculate the probability distribution of \(X\) and its expectation.
+
+\newpage
+
+The trivial cases are
+\[
+  P(X=n)=\frac{1}{n!},
+\]
+and
+\[
+  P(X=n-1)=0.
+\]
+
+In general, for \(k\in\{0,1,2,\ldots,n-2\}\),
+\begin{align*}
+  P(X=k)
+    &=P\bigl(k\text{ elements aligned with the other }(n-k)
+      \text{ elements ALL misaligned}\bigr)\\
+    &=\frac{1}{n!}\binom{n}{k}
+      \left(\sum_{i=2}^{n-k}\frac{(-1)^i}{i!}\right)(n-k)!\\
+    &=\frac{1}{k!}\sum_{i=2}^{n-k}\frac{(-1)^i}{i!}.
+\end{align*}
+
+where \(n!\) is the total number of cases considered, \(\binom{n}{k}\) is the
+binomial coefficient \(C_n^k\), and
+\[
+  \left(\sum_{i=2}^{n-k}\frac{(-1)^i}{i!}\right)(n-k)!
+\]
+is the number of cases where all \((n-k)\) fixed elements are misaligned in
+the alignment.
+
+Therefore, the probability distribution of \(X\) is
+\[
+  P(X=k)=
+  \begin{cases}
+    \displaystyle\frac{1}{k!}\sum_{i=2}^{n-k}\frac{(-1)^i}{i!},
+      & \text{if }k\in\{0,1,2,\ldots,n-2\},\\[1.1em]
+    0, & \text{if }k=n-1,\\[0.25em]
+    \displaystyle\frac{1}{n!}, & \text{if }k=n.
+  \end{cases}
+\]
+
+\newpage
+
+\begin{proposition}
+The expectation of \(X\) is
+\[
+  E(X)=1.
+\]
+\end{proposition}
+
+\begin{paperproof}
+\begin{align*}
+  E(X)
+    &=\frac{n}{n!}+(n-1)\cdot 0
+      +\sum_{k=0}^{n-2}\frac{k}{k!}
+       \sum_{i=2}^{n-k}\frac{(-1)^i}{i!}\\
+    &=\frac{1}{(n-1)!}
+      +\sum_{k=1}^{n-2}\frac{1}{(k-1)!}
+       \sum_{i=2}^{n-k}\frac{(-1)^i}{i!}\\
+    &=\frac{1}{(n-1)!}
+      +\sum_{k=1}^{n-2}\sum_{i=2}^{n-k}
+       \frac{(-1)^i}{i!(k-1)!}.
+\end{align*}
+
+Use induction on \(n\). Suppose we already have
+\[
+  \frac{1}{(n-1)!}
+  +\sum_{k=1}^{n-2}\sum_{i=2}^{n-k}
+   \frac{(-1)^i}{i!(k-1)!}=1.
+\]
+
+\newpage
+
+It follows that, for the \((n+1)\) case,
+\begingroup
+\small
+\setlength{\jot}{6pt}
+\begin{align*}
+  &\frac{1}{n!}
+   +\sum_{k=1}^{n-1}\sum_{i=2}^{n+1-k}
+    \frac{(-1)^i}{i!(k-1)!}\\
+  ={}&\frac{1}{n!}+\frac{1}{2\times(n-2)!}
+   +\sum_{k=1}^{n-2}\sum_{i=2}^{n+1-k}
+    \frac{(-1)^i}{i!(k-1)!}\\
+  ={}&\frac{1}{n!}+\frac{1}{2\times(n-2)!}
+   +\sum_{k=1}^{n-2}\sum_{i=2}^{n-k}
+    \frac{(-1)^i}{i!(k-1)!}
+   +\sum_{k=1}^{n-2}
+    \frac{(-1)^{n+1-k}}{(n+1-k)!(k-1)!}\\
+  ={}&\frac{1}{n!}+\frac{1}{2\times(n-2)!}
+   +1-\frac{1}{(n-1)!}
+   +\sum_{k=1}^{n-2}
+    \frac{(-1)^{n+1-k}}{(n+1-k)!(k-1)!}\\
+  ={}&\frac{n^2-3n+2}{2\times n!}+1
+   +\sum_{k=1}^{n-2}
+    \frac{(-1)^{n+1-k}}{(n+1-k)!(k-1)!}\\
+  ={}&\frac{n^2-3n+2}{2\times n!}+1
+   +\sum_{t=0}^{n-3}\frac{(-1)^{n-t}}{(n-t)!t!}\\
+  ={}&\frac{n^2-3n+2}{2\times n!}+1
+   +\frac{1}{n!}\sum_{t=0}^{n-3}(-1)^{n-t}\binom{n}{t}\\
+  ={}&\frac{n^2-3n+2}{2\times n!}+1
+   -\frac{1}{n!}(-1)^2\binom{n}{n-2}
+   -\frac{1}{n!}(-1)^1\binom{n}{n-1}\\[-0.1em]
+   &\quad
+   -\frac{1}{n!}(-1)^0\binom{n}{n}
+   +\frac{1}{n!}\sum_{t=0}^{n}(-1)^{n-t}\binom{n}{t}\\
+  ={}&\frac{n^2-3n+2}{2\times n!}+1
+   -\frac{1}{n!}\binom{n}{2}
+   +\frac{1}{n!}\binom{n}{1}
+   -\frac{1}{n!}
+   +\frac{1}{n!}(-1+1)^n\\
+  ={}&\frac{n^2-3n+2-n(n-1)+2n-2}{2\times n!}+1\\
+  ={}&1.
+\end{align*}
+\endgroup
+
+By induction, the result
+\[
+  E(X)=1
+\]
+holds for all \(n\in\mathbb{N}\).
+\end{paperproof}
+
+\end{document}

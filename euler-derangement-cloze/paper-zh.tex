@@ -1,0 +1,173 @@
+\documentclass[UTF8,11pt,a4paper,fontset=none]{ctexart}
+
+\usepackage[margin=25mm]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{fontspec}
+\usepackage[hidelinks]{hyperref}
+
+\setmainfont{Latin Modern Roman}
+\setCJKmainfont[AutoFakeSlant=0.2]{Noto Serif CJK SC}
+\setCJKsansfont{Noto Sans CJK SC}
+\setCJKmonofont{Noto Sans Mono CJK SC}
+\pagestyle{plain}
+\setlength{\parindent}{2em}
+\setlength{\parskip}{0.45em}
+\setlength{\jot}{7pt}
+
+\theoremstyle{definition}
+\newtheorem{theorem}{定理}
+
+\title{\textbf{随机排列的不动点}\\
+  \large 概率分布与期望}
+\author{}
+\date{}
+
+\hypersetup{
+  pdftitle={随机排列的不动点——修订中文本},
+  pdfsubject={关于错排与不动点的自足数学报告}
+}
+
+\begin{document}
+
+\newcommand{\EditionName}{中文修订版}
+\newcommand{\EditionSummary}{%
+  本版以修订英文本为基础，用规范的中文重新撰写，并采用相同的定义、结论与证明。}
+\input{cover-page-zh}
+
+\maketitle
+\vspace{-2em}
+
+\begin{abstract}
+从 \(n\) 个元素的所有排列中等概率地任取一个排列，令 \(X\) 表示其中不动点的
+个数。本文利用错排计数推导 \(X\) 的精确概率分布，并证明对任意正整数 \(n\)，
+都有 \(\mathbb{E}[X]=1\)。这一结果也可用于描述如下情形：将 \(n\) 个互不相同
+的选项随机填入 \(n\) 个互不相同的空格时，填对的平均个数为 \(1\)。
+\end{abstract}
+
+\section{问题设定}
+
+对正整数 \(n\)，记
+\[
+  [n]=\{1,2,\ldots,n\}.
+\]
+从对称群 \(S_n\) 的 \(n!\) 个元素中等概率地选取一个排列
+\(\sigma:[n]\to[n]\)。若 \(r\in[n]\) 满足 \(\sigma(r)=r\)，则称 \(r\) 为
+\(\sigma\) 的一个\textbf{不动点}。定义
+\[
+  X=\bigl|\{r\in[n]:\sigma(r)=r\}\bigr|.
+\]
+我们的目标是求随机变量 \(X\) 的概率质量函数及其期望。
+
+\section{错排计数}
+
+没有任何不动点的排列称为\textbf{错排}。用 \(D_m\) 表示 \(m\) 个元素的错排
+数，并约定 \(D_0=1\)。
+
+\begin{theorem}[错排公式]
+对任意整数 \(m\geq 0\)，
+\[
+  D_m=m!\sum_{j=0}^{m}\frac{(-1)^j}{j!}.
+\]
+因此，从 \(m\) 个元素的所有排列中等概率地任取一个，得到错排的概率为
+\[
+  \frac{D_m}{m!}=\sum_{j=0}^{m}\frac{(-1)^j}{j!}.
+\]
+\end{theorem}
+
+\begin{proof}
+对每个 \(r\in[m]\)，令 \(A_r\) 为所有固定 \(r\) 的排列所组成的集合。若
+\(J\subseteq[m]\) 且 \(|J|=j\)，则同时固定 \(J\) 中所有元素的排列恰有
+\((m-j)!\) 个。由容斥原理，
+\begin{align*}
+  D_m
+    &=\left|\bigcap_{r=1}^{m}A_r^{\,c}\right|\\
+    &=\sum_{j=0}^{m}(-1)^j\binom{m}{j}(m-j)!\\
+    &=m!\sum_{j=0}^{m}\frac{(-1)^j}{j!}.
+\end{align*}
+再除以排列总数 \(m!\)，即得所述概率公式。
+\end{proof}
+
+当 \(m\geq 2\) 时，\(j=0\) 与 \(j=1\) 两项相互抵消，因此上述概率也可写成
+\[
+  \sum_{j=2}^{m}\frac{(-1)^j}{j!}.
+\]
+这正是复刻英文本所采用的形式。
+
+\section{不动点个数的分布}
+
+\begin{theorem}
+对 \(k=0,1,\ldots,n\)，
+\[
+  \Pr(X=k)
+    =\frac{\binom{n}{k}D_{n-k}}{n!}
+    =\frac{1}{k!}\sum_{j=0}^{n-k}\frac{(-1)^j}{j!}.
+\]
+\end{theorem}
+
+\begin{proof}
+先选出恰好保持不动的 \(k\) 个位置，共有 \(\binom{n}{k}\) 种选法；其余
+\(n-k\) 个位置必须构成错排，共有 \(D_{n-k}\) 种。因此，恰有 \(k\) 个
+不动点的排列数为 \(\binom{n}{k}D_{n-k}\)。除以排列总数 \(n!\)，并代入
+错排公式，得到
+\begin{align*}
+  \Pr(X=k)
+    &=\frac{\binom{n}{k}D_{n-k}}{n!}\\
+    &=\frac{1}{k!}
+      \sum_{j=0}^{n-k}\frac{(-1)^j}{j!}.
+\end{align*}
+\end{proof}
+
+这一统一公式也包含两个边界情形：
+\[
+  \Pr(X=n)=\frac{1}{n!},
+  \qquad
+  \Pr(X=n-1)=0.
+\]
+第二个等式成立，是因为一个排列不可能只移动一个元素而固定其余所有元素。
+
+\section{不动点个数的期望}
+
+\begin{theorem}
+对任意 \(n\geq 1\)，
+\[
+  \mathbb{E}[X]=1.
+\]
+\end{theorem}
+
+\begin{proof}
+对每个 \(r\in[n]\)，定义示性随机变量
+\[
+  I_r=
+  \begin{cases}
+    1, & \sigma(r)=r,\\
+    0, & \sigma(r)\ne r.
+  \end{cases}
+\]
+于是 \(X=\sum_{r=1}^{n}I_r\)。在全部 \(n!\) 个排列中，固定某个给定位置
+\(r\) 的排列恰有 \((n-1)!\) 个，故
+\[
+  \Pr(\sigma(r)=r)=\frac{(n-1)!}{n!}=\frac{1}{n},
+  \qquad
+  \mathbb{E}[I_r]=\frac{1}{n}.
+\]
+由期望的线性性质，
+\[
+  \mathbb{E}[X]
+    =\sum_{r=1}^{n}\mathbb{E}[I_r]
+    =n\cdot\frac{1}{n}
+    =1.
+\]
+这一论证不要求各示性随机变量彼此独立。
+\end{proof}
+
+\section{结论}
+
+均匀随机排列的不动点个数具有精确分布
+\[
+  \Pr(X=k)=\frac{\binom{n}{k}D_{n-k}}{n!},
+\]
+且其期望恒为 \(1\)。因此，将 \(n\) 个互不相同的答案等概率地随机填入
+\(n\) 个互不相同的空格时，平均会填对一个。这里的“一个”是期望值；在某次
+具体尝试中，可能一个也没填对，也可能填对一个或多个。
+
+\end{document}

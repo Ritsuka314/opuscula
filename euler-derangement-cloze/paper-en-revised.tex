@@ -1,0 +1,185 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[margin=25mm]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{fontspec}
+\usepackage{xeCJK}
+\usepackage{microtype}
+\usepackage[hidelinks]{hyperref}
+
+\setmainfont{Latin Modern Roman}
+\setCJKmainfont[AutoFakeSlant=0.2]{Noto Serif CJK SC}
+\setCJKmonofont{Noto Sans Mono CJK SC}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.65em}
+\setlength{\jot}{7pt}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}{Corollary}
+
+\title{\textbf{Fixed Points of a Random Permutation}\\
+  \large Distribution and Expected Value}
+\author{}
+\date{}
+
+\hypersetup{
+  pdftitle={Fixed Points of a Random Permutation -- Revised English},
+  pdfsubject={A self-contained report on derangements and fixed points}
+}
+
+\begin{document}
+
+\newcommand{\EditionName}{Revised English edition}
+\newcommand{\EditionSummary}{%
+  This edition is a corrected, self-contained report based on the
+  mathematical question in the source video.}
+\input{cover-page}
+
+\maketitle
+\vspace{-2em}
+
+\begin{abstract}
+Let a permutation of \(n\) distinct objects be chosen uniformly at random,
+and let \(X\) denote its number of fixed points. This report derives the exact
+distribution of \(X\) by counting derangements and proves that
+\(\mathbb{E}[X]=1\) for every positive integer \(n\). The result models, for
+example, the number of correct answers obtained when \(n\) distinct choices
+are assigned uniformly at random to \(n\) distinct blanks.
+\end{abstract}
+
+\section{Problem setup}
+
+For a positive integer \(n\), write
+\[
+  [n]=\{1,2,\ldots,n\}.
+\]
+Let \(\sigma:[n]\to[n]\) be a permutation chosen uniformly from the \(n!\)
+elements of the symmetric group \(S_n\). An index \(r\in[n]\) is a
+\emph{fixed point} of \(\sigma\) if \(\sigma(r)=r\). Define
+\[
+  X=\bigl|\{r\in[n]:\sigma(r)=r\}\bigr|.
+\]
+Our goals are to determine the probability mass function of \(X\) and its
+expected value.
+
+\section{Counting derangements}
+
+A \emph{derangement} is a permutation with no fixed points. Let \(D_m\)
+denote the number of derangements of \(m\) objects, with the convention
+\(D_0=1\).
+
+\begin{theorem}[Derangement formula]
+For every integer \(m\geq 0\),
+\[
+  D_m=m!\sum_{j=0}^{m}\frac{(-1)^j}{j!}.
+\]
+Consequently, a uniformly random permutation of \(m\) objects is a
+derangement with probability
+\[
+  \frac{D_m}{m!}=\sum_{j=0}^{m}\frac{(-1)^j}{j!}.
+\]
+\end{theorem}
+
+\begin{proof}
+For \(r\in[m]\), let \(A_r\) be the set of permutations that fix \(r\).
+If a set \(J\subseteq[m]\) has \(j\) elements, then exactly \((m-j)!\)
+permutations fix every element of \(J\). Inclusion--exclusion therefore gives
+\begin{align*}
+  D_m
+    &=\left|\bigcap_{r=1}^{m}A_r^{\,c}\right|\\
+    &=\sum_{j=0}^{m}(-1)^j\binom{m}{j}(m-j)!\\
+    &=m!\sum_{j=0}^{m}\frac{(-1)^j}{j!}.
+\end{align*}
+Dividing by the total number \(m!\) of permutations proves the probability
+formula.
+\end{proof}
+
+When \(m\geq 2\), the terms for \(j=0\) and \(j=1\) cancel. Thus the same
+probability may also be written as
+\[
+  \sum_{j=2}^{m}\frac{(-1)^j}{j!},
+\]
+which is the form used in the reproduced note.
+
+\section{Distribution of the number of fixed points}
+
+\begin{theorem}
+For \(k=0,1,\ldots,n\),
+\[
+  \Pr(X=k)
+    =\frac{\binom{n}{k}D_{n-k}}{n!}
+    =\frac{1}{k!}\sum_{j=0}^{n-k}\frac{(-1)^j}{j!}.
+\]
+\end{theorem}
+
+\begin{proof}
+First choose the \(k\) indices that will be fixed; this can be done in
+\(\binom{n}{k}\) ways. The remaining \(n-k\) indices must then be deranged,
+which can be done in \(D_{n-k}\) ways. Hence exactly
+\(\binom{n}{k}D_{n-k}\) permutations have \(k\) fixed points. Dividing by
+\(n!\) and substituting the derangement formula yields
+\begin{align*}
+  \Pr(X=k)
+    &=\frac{\binom{n}{k}D_{n-k}}{n!}\\
+    &=\frac{1}{k!}
+      \sum_{j=0}^{n-k}\frac{(-1)^j}{j!}.
+\end{align*}
+\end{proof}
+
+The unified formula includes the two boundary cases:
+\[
+  \Pr(X=n)=\frac{1}{n!},
+  \qquad
+  \Pr(X=n-1)=0.
+\]
+The second identity holds because a permutation cannot move exactly one
+element while fixing every other element.
+
+\section{Expected number of fixed points}
+
+\begin{theorem}
+For every \(n\geq 1\),
+\[
+  \mathbb{E}[X]=1.
+\]
+\end{theorem}
+
+\begin{proof}
+For each \(r\in[n]\), define the indicator variable
+\[
+  I_r=
+  \begin{cases}
+    1, & \sigma(r)=r,\\
+    0, & \sigma(r)\ne r.
+  \end{cases}
+\]
+Then \(X=\sum_{r=1}^{n}I_r\). Of the \(n!\) permutations, exactly
+\((n-1)!\) fix a specified index \(r\), so
+\[
+  \Pr(\sigma(r)=r)=\frac{(n-1)!}{n!}=\frac{1}{n}
+  \quad\text{and}\quad
+  \mathbb{E}[I_r]=\frac{1}{n}.
+\]
+By linearity of expectation,
+\[
+  \mathbb{E}[X]
+    =\sum_{r=1}^{n}\mathbb{E}[I_r]
+    =n\cdot\frac{1}{n}
+    =1.
+\]
+The indicator variables need not be independent for this argument.
+\end{proof}
+
+\section{Conclusion}
+
+The number of fixed points in a uniformly random permutation has the exact
+distribution
+\[
+  \Pr(X=k)=\frac{\binom{n}{k}D_{n-k}}{n!},
+\]
+and its mean is always one. Therefore, when \(n\) distinct answers are placed
+uniformly at random into \(n\) distinct blanks, one answer is correct on
+average. This is an expectation statement: an individual attempt may have
+no correct answers, one correct answer, or several.
+
+\end{document}
