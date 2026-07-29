@@ -383,9 +383,11 @@ main,
 }
 
 .writing-motif {
-  display: grid;
-  place-content: center;
-  gap: 5px;
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(6px, 0.8vw, 12px);
   border-left: 1px solid var(--rule);
   background:
     linear-gradient(145deg, transparent 49.8%, var(--rule) 50%, transparent 50.2%),
@@ -394,6 +396,7 @@ main,
   font-size: clamp(3rem, 6vw, 5.5rem);
   font-style: italic;
   text-align: center;
+  white-space: nowrap;
 }
 
 .motif-arrow {
