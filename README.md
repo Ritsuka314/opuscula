@@ -3,11 +3,10 @@
 Recreational and semi-formal writings by K. Ritsuka, published at
 [opuscula.ritsuka.moe](https://opuscula.ritsuka.moe/).
 
-This directory contains the standalone Opuscula site within the
-[personal-website repository](https://github.com/Ritsuka314/personal-website).
-Each writing occupies one directory containing its source, compiled documents,
-publication notes, and web landing page. The directory root supplies the
-collection catalogue and shared site assets.
+This repository contains the complete standalone Opuscula site: sources,
+compiled documents, publication notes, and web pages. Each writing occupies
+one directory, while the repository root supplies the collection catalogue
+and shared site assets.
 
 ## Writings
 
@@ -35,6 +34,6 @@ by running `latexmk -xelatex` on their `.tex` files from within the writing
 directory; see its [README](euler-derangement-cloze/README.md) for the exact
 commands.
 
-The website is plain HTML and CSS and requires no build step. A GitHub Actions
-workflow publishes this directory as the Pages artifact for
-`opuscula.ritsuka.moe`.
+The website is plain HTML and CSS and requires no build step. GitHub Pages
+publishes the repository root at `opuscula.ritsuka.moe`; the `CNAME` file
+records that custom domain.

@@ -10,7 +10,7 @@ Publication page:
 [opuscula.ritsuka.moe/euler-derangement-cloze](https://opuscula.ritsuka.moe/euler-derangement-cloze/)
 
 Sources in the Opuscula repository:
-[github.com/Ritsuka314/personal-website/tree/master/opuscula/euler-derangement-cloze](https://github.com/Ritsuka314/personal-website/tree/master/opuscula/euler-derangement-cloze)
+[github.com/Ritsuka314/opuscula/tree/main/euler-derangement-cloze](https://github.com/Ritsuka314/opuscula/tree/main/euler-derangement-cloze)
 
 ## Editions
 
