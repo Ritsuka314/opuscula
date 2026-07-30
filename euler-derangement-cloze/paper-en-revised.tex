@@ -18,7 +18,7 @@
 \newtheorem{corollary}{Corollary}
 
 \title{\textbf{Fixed Points of a Random Permutation}\\
-  \large Distribution and Expected Value}
+  \large Expected Value and Distribution}
 \author{}
 \date{}
 
@@ -40,11 +40,12 @@
 
 \begin{abstract}
 Let a permutation of \(n\) distinct objects be chosen uniformly at random,
-and let \(X\) denote its number of fixed points. This report derives the exact
-distribution of \(X\) by counting derangements and proves that
-\(\mathbb{E}[X]=1\) for every positive integer \(n\). The result models, for
-example, the number of correct answers obtained when \(n\) distinct choices
-are assigned uniformly at random to \(n\) distinct blanks.
+and let \(X\) denote its number of fixed points. This report first proves
+directly that \(\mathbb{E}[X]=1\) for every positive integer \(n\). It then
+develops the derangement formula step by step using inclusion--exclusion and
+derives the exact distribution of \(X\). The result models, for example, the
+number of correct answers obtained when \(n\) distinct choices are assigned
+uniformly at random to \(n\) distinct blanks.
 \end{abstract}
 
 \section{Problem setup}
@@ -59,81 +60,8 @@ elements of the symmetric group \(S_n\). An index \(r\in[n]\) is a
 \[
   X=\bigl|\{r\in[n]:\sigma(r)=r\}\bigr|.
 \]
-Our goals are to determine the probability mass function of \(X\) and its
-expected value.
-
-\section{Counting derangements}
-
-A \emph{derangement} is a permutation with no fixed points. Let \(D_m\)
-denote the number of derangements of \(m\) objects, with the convention
-\(D_0=1\).
-
-\begin{theorem}[Derangement formula]
-For every integer \(m\geq 0\),
-\[
-  D_m=m!\sum_{j=0}^{m}\frac{(-1)^j}{j!}.
-\]
-Consequently, a uniformly random permutation of \(m\) objects is a
-derangement with probability
-\[
-  \frac{D_m}{m!}=\sum_{j=0}^{m}\frac{(-1)^j}{j!}.
-\]
-\end{theorem}
-
-\begin{proof}
-For \(r\in[m]\), let \(A_r\) be the set of permutations that fix \(r\).
-If a set \(J\subseteq[m]\) has \(j\) elements, then exactly \((m-j)!\)
-permutations fix every element of \(J\). Inclusion--exclusion therefore gives
-\begin{align*}
-  D_m
-    &=\left|\bigcap_{r=1}^{m}\overline{A_r}\right|\\
-    &=\sum_{j=0}^{m}(-1)^j\binom{m}{j}(m-j)!\\
-    &=m!\sum_{j=0}^{m}\frac{(-1)^j}{j!}.
-\end{align*}
-Dividing by the total number \(m!\) of permutations proves the probability
-formula.
-\end{proof}
-
-When \(m\geq 2\), the terms for \(j=0\) and \(j=1\) cancel. Thus the same
-probability may also be written as
-\[
-  \sum_{j=2}^{m}\frac{(-1)^j}{j!},
-\]
-which is the form used in the reproduced note.
-
-\section{Distribution of the number of fixed points}
-
-\begin{theorem}
-For \(k=0,1,\ldots,n\),
-\[
-  \Pr(X=k)
-    =\frac{\binom{n}{k}D_{n-k}}{n!}
-    =\frac{1}{k!}\sum_{j=0}^{n-k}\frac{(-1)^j}{j!}.
-\]
-\end{theorem}
-
-\begin{proof}
-First choose the \(k\) indices that will be fixed; this can be done in
-\(\binom{n}{k}\) ways. The remaining \(n-k\) indices must then be deranged,
-which can be done in \(D_{n-k}\) ways. Hence exactly
-\(\binom{n}{k}D_{n-k}\) permutations have \(k\) fixed points. Dividing by
-\(n!\) and substituting the derangement formula yields
-\begin{align*}
-  \Pr(X=k)
-    &=\frac{\binom{n}{k}D_{n-k}}{n!}\\
-    &=\frac{1}{k!}
-      \sum_{j=0}^{n-k}\frac{(-1)^j}{j!}.
-\end{align*}
-\end{proof}
-
-The unified formula includes the two boundary cases:
-\[
-  \Pr(X=n)=\frac{1}{n!},
-  \qquad
-  \Pr(X=n-1)=0.
-\]
-The second identity holds because a permutation cannot move exactly one
-element while fixing every other element.
+Our main question is the expected value of \(X\); afterward we determine its
+entire probability mass function as a stronger result.
 
 \section{Expected number of fixed points}
 
@@ -170,14 +98,151 @@ By linearity of expectation,
 The indicator variables need not be independent for this argument.
 \end{proof}
 
+\textbf{Equivalent double-counting view.}
+Count the pairs \((\sigma,r)\in S_n\times[n]\) for which
+\(\sigma(r)=r\). For each of the \(n\) choices of \(r\), exactly
+\((n-1)!\) permutations fix \(r\), so there are
+\(n(n-1)!=n!\) such pairs. Dividing this total number of fixed-point
+incidences by the \(n!\) permutations again shows that the average number of
+fixed points is \(1\).
+
+\section{Derangements and the exact distribution}
+
+The expectation proof does not require the distribution of \(X\). To obtain
+the stronger result \(\Pr(X=k)\) for every \(k\), we first count
+permutations having no fixed points.
+
+\subsection{Counting derangements}
+
+A \emph{derangement} is a permutation with no fixed points. Let \(D_m\)
+denote the number of derangements of \(m\) objects, with the convention
+\(D_0=1\).
+
+\begin{theorem}[Derangement formula]
+For every integer \(m\geq 0\),
+\[
+  D_m=m!\sum_{j=0}^{m}\frac{(-1)^j}{j!}.
+\]
+Consequently, a uniformly random permutation of \(m\) objects is a
+derangement with probability
+\[
+  \frac{D_m}{m!}=\sum_{j=0}^{m}\frac{(-1)^j}{j!}.
+\]
+\end{theorem}
+
+\begin{proof}
+For \(m=0\), the single empty permutation is a derangement, and the formula
+gives \(D_0=1\). Now suppose \(m\geq 1\), and take the full set \(S_m\) of
+all \(m!\) permutations as the universe. For each \(r\in[m]\), let
+\[
+  A_r=\{\sigma\in S_m:\sigma(r)=r\};
+\]
+thus \(A_r\) is the set of permutations that fix \(r\). A permutation is a
+derangement precisely when it lies in none of \(A_1,\ldots,A_m\), so
+\[
+  D_m=\left|\bigcap_{r=1}^{m}\overline{A_r}\right|.
+\]
+
+Inclusion--exclusion begins with all \(m!\) permutations, subtracts those
+that fix each specified element, adds back those subtracted twice because
+they fix two specified elements, and continues with alternating signs:
+\begin{align*}
+  D_m
+    ={}&|S_m|-\sum_{r=1}^{m}|A_r|
+       +\sum_{1\leq r<s\leq m}|A_r\cap A_s|-\cdots\\
+       &\quad+(-1)^m|A_1\cap\cdots\cap A_m|.
+\end{align*}
+To evaluate these terms, choose a subset \(J\subseteq[m]\) with
+\(|J|=j\). If every element of \(J\) must be fixed, the remaining \(m-j\)
+elements may be permuted arbitrarily. Hence
+\[
+  \left|\bigcap_{r\in J}A_r\right|=(m-j)!.
+\]
+When \(J=\varnothing\), the intersection is understood to be the whole
+universe \(S_m\), so this statement also includes the \(j=0\) term.
+There are \(\binom{m}{j}\) choices for \(J\). Grouping the
+inclusion--exclusion terms according to \(j\) therefore gives
+\begin{align*}
+  D_m
+    &=\sum_{j=0}^{m}(-1)^j\binom{m}{j}(m-j)!\\
+    &=m!\sum_{j=0}^{m}\frac{(-1)^j}{j!}.
+\end{align*}
+
+For completeness, the alternating sum keeps exactly the desired
+permutations. A permutation with \(q\geq1\) fixed points occurs in
+\(\binom{q}{j}\) of the terms involving \(j\) prescribed fixed points, so
+its net coefficient is
+\[
+  \sum_{j=0}^{q}(-1)^j\binom{q}{j}=(1-1)^q=0.
+\]
+A derangement has \(q=0\) and remains counted once. This also explains
+directly why inclusion--exclusion works here.
+
+Dividing by the total number \(m!\) of permutations proves the probability
+formula.
+\end{proof}
+
+For example,
+\[
+  D_3
+    =3!-\binom{3}{1}2!+\binom{3}{2}1!-\binom{3}{3}0!
+    =6-6+3-1
+    =2.
+\]
+In one-line notation, the two derangements are \([2,3,1]\) and
+\([3,1,2]\).
+
+When \(m\geq 2\), the terms for \(j=0\) and \(j=1\) cancel. Thus the same
+probability may also be written as
+\[
+  \sum_{j=2}^{m}\frac{(-1)^j}{j!},
+\]
+which is the form used in the reproduced note.
+
+\subsection{Distribution of the number of fixed points}
+
+\begin{theorem}
+For \(k=0,1,\ldots,n\),
+\[
+  \Pr(X=k)
+    =\frac{\binom{n}{k}D_{n-k}}{n!}
+    =\frac{1}{k!}\sum_{j=0}^{n-k}\frac{(-1)^j}{j!}.
+\]
+\end{theorem}
+
+\begin{proof}
+First choose the \(k\) indices that will be fixed; this can be done in
+\(\binom{n}{k}\) ways. The remaining \(n-k\) indices must then be deranged,
+which can be done in \(D_{n-k}\) ways. Hence exactly
+\(\binom{n}{k}D_{n-k}\) permutations have \(k\) fixed points. Dividing by
+\(n!\) and substituting the derangement formula yields
+\begin{align*}
+  \Pr(X=k)
+    &=\frac{\binom{n}{k}D_{n-k}}{n!}\\
+    &=\frac{1}{k!}
+      \sum_{j=0}^{n-k}\frac{(-1)^j}{j!}.
+\end{align*}
+\end{proof}
+
+The unified formula includes the two boundary cases:
+\[
+  \Pr(X=n)=\frac{1}{n!},
+  \qquad
+  \Pr(X=n-1)=0.
+\]
+The second identity holds because a permutation cannot move exactly one
+element while fixing every other element.
+
 \section{Conclusion}
 
-The number of fixed points in a uniformly random permutation has the exact
+The direct indicator argument shows that a uniformly random permutation has
+one fixed point on average. The stronger counting argument gives the exact
 distribution
 \[
   \Pr(X=k)=\frac{\binom{n}{k}D_{n-k}}{n!},
 \]
-and its mean is always one. Therefore, when \(n\) distinct answers are placed
+where the derangement number \(D_{n-k}\) is obtained by
+inclusion--exclusion. Therefore, when \(n\) distinct answers are placed
 uniformly at random into \(n\) distinct blanks, one answer is correct on
 average. This is an expectation statement: an individual attempt may have
 no correct answers, one correct answer, or several.
