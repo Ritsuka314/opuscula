@@ -4,6 +4,7 @@ import process from "node:process";
 import { fileURLToPath } from "node:url";
 
 import { Eta } from "eta";
+import { renderArticle } from "./render-article.mjs";
 
 const scriptDirectory = path.dirname(fileURLToPath(import.meta.url));
 const siteRoot = path.resolve(scriptDirectory, "..");
@@ -66,7 +67,7 @@ function assertLocalFilename(filename, field) {
 
 async function validateData(site, writings) {
   assertObject(site, "site");
-  for (const field of ["name", "owner", "description", "baseUrl", "repositoryUrl", "repositoryBranch", "themeColor", "era", "footerLabel"]) {
+  for (const field of ["name", "nameCjk", "owner", "ownerCjk", "description", "baseUrl", "repositoryUrl", "repositoryBranch", "themeColor", "footerLabel"]) {
     assertString(site[field], `site.${field}`);
   }
   assertObject(site.hero, "site.hero");
@@ -93,7 +94,7 @@ async function validateData(site, writings) {
 
   for (const writing of writings) {
     assertObject(writing, "writing");
-    for (const field of ["number", "slug", "category", "kind", "lang", "title", "summary", "metaDescription", "deck", "editionsTitle", "editionsIntroduction"]) {
+    for (const field of ["number", "slug", "category", "kind", "lang", "title", "summary", "metaDescription", "deck"]) {
       assertString(writing[field], `${writing.slug ?? "writing"}.${field}`);
     }
 
@@ -125,7 +126,7 @@ async function validateData(site, writings) {
     assert(Array.isArray(writing.cardActions) && writing.cardActions.length > 0, `${writing.slug}.cardActions must not be empty`);
     for (const [index, action] of writing.cardActions.entries()) {
       assertString(action.label, `${writing.slug}.cardActions[${index}].label`);
-      assert(["dark", "light"].includes(action.kind), `${writing.slug}.cardActions[${index}].kind is invalid`);
+      assert(["primary", "secondary"].includes(action.kind), `${writing.slug}.cardActions[${index}].kind is invalid`);
       assert(typeof action.href === "string", `${writing.slug}.cardActions[${index}].href must be a string`);
       if (action.lang !== undefined) {
         assertString(action.lang, `${writing.slug}.cardActions[${index}].lang`);
@@ -139,7 +140,7 @@ async function validateData(site, writings) {
     assert(Array.isArray(writing.publicationActions) && writing.publicationActions.length > 0, `${writing.slug}.publicationActions must not be empty`);
     for (const [index, action] of writing.publicationActions.entries()) {
       assertString(action.label, `${writing.slug}.publicationActions[${index}].label`);
-      assert(["dark", "light"].includes(action.kind), `${writing.slug}.publicationActions[${index}].kind is invalid`);
+      assert(["primary", "secondary"].includes(action.kind), `${writing.slug}.publicationActions[${index}].kind is invalid`);
       assertLocalFilename(action.href, `${writing.slug}.publicationActions[${index}].href`);
       if (action.lang !== undefined) {
         assertString(action.lang, `${writing.slug}.publicationActions[${index}].lang`);
@@ -153,6 +154,29 @@ async function validateData(site, writings) {
       assertString(fact.value, `${writing.slug}.facts[${index}].value`);
     }
 
+    if (writing.article !== undefined) {
+      assertObject(writing.article, `${writing.slug}.article`);
+      const languages = writing.article.languages;
+      assert(Array.isArray(languages) && languages.length === 2, `${writing.slug}.article.languages must contain two languages`);
+      const languageCodes = new Set();
+      for (const [index, language] of languages.entries()) {
+        for (const field of ["lang", "label", "source"]) {
+          assertString(language[field], `${writing.slug}.article.languages[${index}].${field}`);
+        }
+        assert(/^[a-z]{2}(?:-[A-Za-z]{2,8})*$/.test(language.lang), `${writing.slug}: invalid article language`);
+        assert(!languageCodes.has(language.lang), `${writing.slug}: duplicate article language`);
+        languageCodes.add(language.lang);
+        assertLocalFilename(language.source, `${writing.slug}.article.languages[${index}].source`);
+        assert(language.source.endsWith(".md"), `${writing.slug}: article sources must be Markdown`);
+        assert(await pathExists(path.join(writingDirectory, language.source)), `missing article source: ${writing.slug}/${language.source}`);
+      }
+      assert(languageCodes.has(writing.lang), `${writing.slug}: page language must have an article source`);
+      continue;
+    }
+
+    for (const field of ["editionsTitle", "editionsIntroduction"]) {
+      assertString(writing[field], `${writing.slug}.${field}`);
+    }
     assert(Array.isArray(writing.editions) && writing.editions.length > 0, `${writing.slug}.editions must not be empty`);
     for (const [index, edition] of writing.editions.entries()) {
       for (const field of ["number", "language", "title", "description", "pdf", "source"]) {
@@ -218,7 +242,7 @@ function pageForCatalogue(site) {
       { href: site.repositoryUrl, label: "Source" }
     ],
     footer: {
-      left: { href: null, label: site.footerLabel },
+      left: { href: null, label: site.footerLabel, lang: "zh-Hant" },
       right: { href: site.repositoryUrl, label: "View the sources" }
     }
   };
@@ -232,10 +256,12 @@ function pageForWriting(site, writing) {
     description: writing.metaDescription,
     canonical: `${site.baseUrl}/${writing.slug}/`,
     stylesheet: "../assets/site.css",
+    extraStylesheets: writing.article ? ["../assets/article.css"] : [],
+    scripts: writing.article ? ["../assets/article.js"] : [],
     homeHref: "../",
     navigation: [
       { href: "../#writings", label: "Writings" },
-      { href: "#editions", label: "Editions" },
+      { href: writing.article ? "#contents" : "#editions", label: writing.article ? "Contents" : "Editions" },
       { href: sourceUrl, label: "Source" }
     ],
     footer: {
@@ -354,10 +380,13 @@ results.push(await renderOutput(
 ));
 
 for (const [index, writing] of writings.entries()) {
+  const article = writing.article
+    ? await renderArticle(path.join(siteRoot, writing.slug), writing.article.languages)
+    : null;
   results.push(await renderOutput(
-    "writing",
+    article ? "article" : "writing",
     outputFiles[index + 1],
-    { site, writing, page: pageForWriting(site, writing) }
+    { site, writing, article, page: pageForWriting(site, writing) }
   ));
 }
 

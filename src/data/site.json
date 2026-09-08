@@ -1,31 +1,32 @@
 {
-  "name": "Opuscula",
-  "owner": "K. Ritsuka",
-  "description": "Recreational and semi-formal writings by K. Ritsuka.",
+  "name": "萬象",
+  "nameCjk": "萬象",
+  "owner": "Hoshikawa Miyu",
+  "ownerCjk": "星川未有",
+  "description": "一位少女的萬象觀測志。",
   "baseUrl": "https://opuscula.ritsuka.moe",
   "repositoryUrl": "https://github.com/Ritsuka314/opuscula",
   "repositoryBranch": "main",
-  "themeColor": "#f2eee5",
-  "era": "MMXXVI",
+  "themeColor": "#0d1311",
   "hero": {
-    "eyebrow": "Recreational & semi-formal writings",
-    "titleLead": "Small works,",
-    "titleEmphasis": "carefully kept.",
-    "introduction": "Notes, reconstructions, and mathematical diversions by",
-    "browseLabel": "Browse the collection"
+    "eyebrow": "萬象, and 數、形、偶然與其他幽微之事",
+    "titleLead": "大處觀萬象，",
+    "titleEmphasis": "微處見未有",
+    "introduction": "一位少女的萬象觀測志。",
+    "browseLabel": "Browse the observations"
   },
   "catalogue": {
-    "eyebrow": "The collection",
+    "eyebrow": "所見之外，萬象成文",
     "title": "Writings",
-    "description": "Complete texts, source files, and editorial context."
+    "description": "Notes on number, form, chance, and other subtle things."
   },
   "about": {
-    "eyebrow": "About the name",
-    "title": "Opuscula",
+    "eyebrow": "關於此名",
+    "title": "星川未有",
     "paragraphs": [
-      "<i>Opusculum</i> is Latin for a small work; <i>opuscula</i> is its plural. The name suits pieces that may be modest in extent without being casual in their preparation.",
-      "Every entry preserves its sources and distinguishes reproduction, translation, and revision wherever those differences matter."
+      "筆名「星川未有」取自《事象的宏圖》中同名人物，以誌所受之啟。",
+      "「萬象」收錄數學札記、偶然所得與其他幽微之事。每篇均保留其來源，並在轉錄、翻譯與修訂有所區別時明記其異。"
     ]
   },
-  "footerLabel": "Opuscula · K. Ritsuka"
+  "footerLabel": "萬象 · 星川未有"
 }

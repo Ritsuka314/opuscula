@@ -5,16 +5,22 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="<%= it.page.description %>">
+  <meta name="color-scheme" content="dark">
   <meta name="theme-color" content="<%= it.site.themeColor %>">
   <title><%= it.page.title %></title>
   <link rel="canonical" href="<%= it.page.canonical %>">
   <link rel="stylesheet" href="<%= it.page.stylesheet %>">
+<% for (const stylesheet of (it.page.extraStylesheets || [])) { -%>
+  <link rel="stylesheet" href="<%= stylesheet %>">
+<% } -%>
+<% for (const script of (it.page.scripts || [])) { -%>
+  <script type="module" src="<%= script %>"></script>
+<% } -%>
 </head>
 <body>
   <header class="site-header">
-    <a class="wordmark" href="<%= it.page.homeHref %>" aria-label="Opuscula home">
-      <span class="wordmark-mark" aria-hidden="true">O</span>
-      <span><%= it.site.name %></span>
+    <a class="wordmark" href="<%= it.page.homeHref %>" aria-label="<%= it.site.name %> home">
+      <span lang="zh-Hant"><%= it.site.name %></span>
     </a>
     <nav aria-label="Main navigation">
 <% it.page.navigation.forEach((item) => { -%>
@@ -29,7 +35,7 @@
 <% if (it.page.footer.left.href) { -%>
     <p><a href="<%= it.page.footer.left.href %>"><%= it.page.footer.left.label %></a></p>
 <% } else { -%>
-    <p><%= it.page.footer.left.label %></p>
+    <p<% if (it.page.footer.left.lang) { %> lang="<%= it.page.footer.left.lang %>"<% } %>><%= it.page.footer.left.label %></p>
 <% } -%>
     <p><a href="<%= it.page.footer.right.href %>"><%= it.page.footer.right.label %></a></p>
   </footer>

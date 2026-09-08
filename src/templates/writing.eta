@@ -1,14 +1,14 @@
 <% layout("./base") -%>
   <main class="publication-main">
     <nav class="breadcrumbs" aria-label="Breadcrumb">
-      <a href="../"><%= it.site.name %></a><span aria-hidden="true">/</span>Writing <%= it.writing.number %>
+      <a href="../" lang="zh-Hant"><%= it.site.name %></a><span aria-hidden="true">/</span>Writing <%= it.writing.number %>
     </nav>
 
     <article>
       <header class="publication-hero">
         <div>
-          <p class="publication-index">OPVSCVLVM · <%= it.writing.number %></p>
-          <p class="publication-meta"><%= it.writing.category %> · <%= it.writing.kind %></p>
+          <p class="publication-index"><%= it.writing.number %> / <%= it.site.name %></p>
+          <p class="publication-meta"><%= it.writing.category %> / <%= it.writing.kind %></p>
           <h1 class="publication-title"><%= it.writing.title %></h1>
 <% if (it.writing.subtitle) { -%>
           <p class="publication-subtitle"<% if (it.writing.subtitle.lang) { %> lang="<%= it.writing.subtitle.lang %>"<% } %>><%= it.writing.subtitle.text %></p>
@@ -18,7 +18,7 @@
           </p>
           <div class="publication-actions">
 <% it.writing.publicationActions.forEach((action) => { -%>
-            <a class="button button-<%= action.kind %>" href="<%= action.href %>"<% if (action.lang) { %> lang="<%= action.lang %>"<% } %>><%= action.label %></a>
+            <a class="action-link action-<%= action.kind %>" href="<%= action.href %>"<% if (action.lang) { %> lang="<%= action.lang %>"<% } %>><%= action.label %></a>
 <% }) -%>
           </div>
         </div>
@@ -51,8 +51,8 @@
               <%= edition.description %>
             </p>
             <div class="edition-actions">
-              <a class="button button-dark" href="<%= edition.pdf %>">PDF</a>
-              <a class="button button-light" href="<%= edition.source %>">LaTeX</a>
+              <a class="action-link action-primary" href="<%= edition.pdf %>">PDF</a>
+              <a class="action-link action-secondary" href="<%= edition.source %>">LaTeX</a>
             </div>
           </section>
 <% }) -%>

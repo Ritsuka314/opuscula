@@ -5,12 +5,13 @@
   "type": "module",
   "scripts": {
     "build": "node scripts/build-site.mjs",
-    "check": "node scripts/build-site.mjs --check"
+    "check": "node --test scripts/render-article.test.mjs && node scripts/build-site.mjs --check"
   },
   "engines": {
     "node": ">=20"
   },
   "devDependencies": {
-    "eta": "4.6.0"
+    "eta": "4.6.0",
+    "markdown-it": "14.3.1"
   }
 }

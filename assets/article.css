@@ -1,0 +1,331 @@
+/* Bilingual essays: aligned sections, with a comfortable single-language measure. */
+.article-main {
+  --article-rule: rgba(143, 154, 148, 0.2);
+  padding-bottom: 60px;
+}
+
+.article-main [hidden] {
+  display: none !important;
+}
+
+.essay-header {
+  max-width: 900px;
+  padding-block: clamp(32px, 6vw, 80px) 56px;
+}
+
+.essay-header h1 {
+  margin: 0;
+  font-size: clamp(2.8rem, 6.5vw, 5.7rem);
+  font-weight: 320;
+  letter-spacing: -0.045em;
+  line-height: 1.02;
+  text-wrap: balance;
+}
+
+.essay-subtitle {
+  margin: 24px 0;
+  color: var(--cool);
+  font-size: clamp(1.3rem, 2.5vw, 1.9rem);
+  letter-spacing: 0.08em;
+}
+
+.essay-deck {
+  max-width: 650px;
+  color: var(--text-soft);
+  font-size: 1.14rem;
+}
+
+.essay-byline {
+  margin-top: 30px;
+  color: var(--text-soft);
+  font-size: 0.88rem;
+}
+
+.essay-byline > span:first-child {
+  padding-inline: 0.6em;
+  color: var(--warm);
+}
+
+.reading-controls {
+  position: sticky;
+  z-index: 2;
+  top: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  padding-block: 14px;
+  border-block: 1px solid var(--article-rule);
+  background: var(--canvas);
+}
+
+.reading-label {
+  margin-right: auto;
+  color: var(--text-soft);
+  font-size: 0.8rem;
+}
+
+.reading-controls button {
+  min-height: 44px;
+  padding: 8px 14px;
+  border: 1px solid transparent;
+  border-radius: 3px;
+  background: transparent;
+  color: var(--text-soft);
+  font: inherit;
+  font-size: 0.86rem;
+  cursor: pointer;
+}
+
+.reading-controls button:hover {
+  color: var(--text);
+  background: var(--surface);
+}
+
+.reading-controls button[aria-pressed="true"] {
+  border-color: var(--cool);
+  color: var(--text);
+}
+
+.article-contents {
+  margin-block: 24px 40px;
+  scroll-margin-top: 100px;
+  color: var(--text-soft);
+  font-size: 0.9rem;
+}
+
+.article-contents summary {
+  width: fit-content;
+  padding-block: 8px;
+  cursor: pointer;
+}
+
+.article-contents summary span {
+  margin-left: 12px;
+}
+
+.article-contents ol {
+  padding-left: 1.5em;
+  line-height: 1.9;
+}
+
+.article-contents a {
+  display: inline-flex;
+  flex-wrap: wrap;
+  column-gap: 1em;
+}
+
+.bilingual-section {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(32px, 5vw, 72px);
+  padding-block: 24px 52px;
+  scroll-margin-top: 100px;
+}
+
+.bilingual-section + .bilingual-section {
+  padding-top: 48px;
+  border-top: 1px solid var(--article-rule);
+}
+
+.article-prose {
+  min-width: 0;
+  font-family: Georgia, "Noto Serif CJK TC", "Noto Serif CJK JP", serif;
+  font-size: 1.065rem;
+  line-height: 1.85;
+  overflow-wrap: break-word;
+}
+
+.article-prose:lang(zh-Hant) {
+  font-family: "Noto Serif CJK TC", "Source Han Serif TC", "Songti TC",
+    "PMingLiU", serif;
+  line-height: 1.95;
+}
+
+.article-prose:lang(zh-Hant) :where(p, a, strong, em, ruby, rp, rt) {
+  font-family: inherit;
+}
+
+.article-prose :lang(ja) {
+  font-family: "Noto Serif CJK JP", "Yu Mincho", "Hiragino Mincho ProN", serif;
+}
+
+/* Pinyin needs a Latin face with every tone-marked vowel. Explicit language
+   tags keep it out of the surrounding serif/CJK stacks, including in tables.
+   Use upright letters so tone marks are not distorted by synthetic italics. */
+.article-prose :lang(zh-Latn) {
+  font-family: var(--sans);
+  font-style: normal;
+}
+
+.article-prose h2,
+.article-prose h3 {
+  color: var(--text);
+  font-family: var(--sans), var(--cjk);
+  font-weight: 560;
+  line-height: 1.35;
+  text-wrap: balance;
+}
+
+.article-prose h2 {
+  margin: 0 0 26px;
+  font-size: clamp(1.5rem, 2.4vw, 1.95rem);
+  letter-spacing: -0.025em;
+}
+
+.article-prose h3 {
+  margin: 36px 0 14px;
+  font-size: 1.14rem;
+}
+
+.article-prose p {
+  margin: 0 0 1.2em;
+}
+
+.article-prose .section-language {
+  margin-bottom: 15px;
+  color: var(--cool);
+  font-family: var(--sans);
+  font-size: 0.75rem;
+  letter-spacing: 0.03em;
+}
+
+.article-prose a {
+  color: var(--cool);
+  text-decoration-thickness: 1px;
+}
+
+.article-prose ruby {
+  ruby-position: over;
+}
+
+.article-prose rt {
+  font-size: 0.58em;
+  font-weight: 400;
+}
+
+/* Keep each name part with its reading; allow a wrap between surname and given name. */
+.article-table .name-reading {
+  white-space: nowrap;
+}
+
+.article-table .name-reading rt {
+  font-family: var(--sans);
+  font-size: 0.75rem;
+}
+
+.article-prose blockquote {
+  margin: 26px 0;
+  padding: 14px 22px;
+  border-left: 2px solid var(--warm);
+  background: var(--surface);
+  font-family: var(--sans);
+  letter-spacing: 0.08em;
+}
+
+.article-prose blockquote p:last-child {
+  margin-bottom: 0;
+}
+
+.article-table {
+  max-width: 100%;
+  overflow-x: auto;
+  margin-block: 26px;
+  scrollbar-color: var(--text-soft) var(--canvas);
+}
+
+.article-table table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--sans), var(--cjk);
+  font-size: 0.87rem;
+  line-height: 1.65;
+}
+
+.article-table th,
+.article-table td {
+  padding: 12px 10px;
+  border-bottom: 1px solid var(--article-rule);
+  text-align: left;
+  vertical-align: top;
+}
+
+.article-table th {
+  border-top: 1px solid var(--cool);
+  color: var(--cool);
+  font-weight: 560;
+}
+
+.article-table th:first-child,
+.article-table td:first-child {
+  padding-left: 0;
+}
+
+.article-main:not([data-reading-mode="all"]) .bilingual-section {
+  grid-template-columns: minmax(0, 1fr);
+  max-width: 730px;
+  margin-inline: auto;
+}
+
+.essay-sources {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 24px;
+  align-items: baseline;
+  padding-block: 30px;
+  border-top: 1px solid var(--article-rule);
+  color: var(--text-soft);
+  font-size: 0.85rem;
+}
+
+.essay-sources p {
+  margin-right: auto;
+}
+
+@media (max-width: 850px) {
+  .bilingual-section {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 36px;
+  }
+
+  .article-main {
+    max-width: 730px;
+  }
+}
+
+@media (max-width: 480px) {
+  .reading-label {
+    display: none;
+  }
+
+  .reading-controls {
+    gap: 2px;
+  }
+
+  .reading-controls button {
+    padding-inline: 10px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
+
+@media print {
+  :root { color-scheme: light; }
+  body { background: white; color: #222; }
+  .site-header, .site-footer, .breadcrumbs, .reading-controls, .article-contents,
+  .essay-sources { display: none !important; }
+  .article-main { width: 100%; --article-rule: #ccc; }
+  .essay-header { padding-block: 0 24px; }
+  .essay-header h1 { font-size: 28pt; }
+  .essay-subtitle, .essay-deck, .essay-byline, .article-prose h2, .article-prose h3,
+  .article-prose .section-language, .article-prose a, .article-table th { color: #222; }
+  .article-prose { font-size: 10pt; }
+  .article-prose h2, .article-prose h3 { break-after: avoid; }
+  .article-prose p { orphans: 3; widows: 3; }
+  .article-prose blockquote { background: none; border-color: #666; }
+  .article-table { overflow: visible; }
+  .article-table tr { break-inside: avoid; }
+  .bilingual-section { gap: 24px; padding-bottom: 24px; }
+}

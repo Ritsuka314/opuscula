@@ -19,12 +19,12 @@
     "cardActions": [
       {
         "label": "View writing",
-        "kind": "dark",
+        "kind": "primary",
         "href": ""
       },
       {
         "label": "Read revised PDF",
-        "kind": "light",
+        "kind": "secondary",
         "href": "paper-en-revised.pdf"
       }
     ],
@@ -33,20 +33,20 @@
     "publicationActions": [
       {
         "label": "Read revised English",
-        "kind": "dark",
+        "kind": "primary",
         "href": "paper-en-revised.pdf"
       },
       {
         "label": "阅读中文修订版",
         "lang": "zh-Hans",
-        "kind": "light",
+        "kind": "secondary",
         "href": "paper-zh.pdf"
       }
     ],
     "facts": [
       {
         "label": "Collection",
-        "value": "Opuscula, no. 001"
+        "value": "萬象, no. 001"
       },
       {
         "label": "Documents",
@@ -58,14 +58,14 @@
       },
       {
         "label": "Prepared by",
-        "value": "K. Ritsuka"
+        "value": "Hoshikawa Miyu / 星川未有"
       }
     ],
     "editionsTitle": "Three editions",
     "editionsIntroduction": "The reproduction preserves what appeared in the video. The two revised reports repair the mathematics and exposition, and stand on their own.",
     "editions": [
       {
-        "number": "I / III",
+        "number": "01 / 03",
         "language": "English · Reproduced",
         "title": "Source-faithful edition",
         "description": "A close typesetting of the four visible pages, intentionally preserving their unusual wording, omissions, notation, and induction calculation.",
@@ -73,7 +73,7 @@
         "source": "paper-en.tex"
       },
       {
-        "number": "II / III",
+        "number": "02 / 03",
         "language": "English · Revised",
         "title": "Corrected report",
         "description": "A self-contained treatment with a precise model, an inclusion–exclusion proof, a unified probability distribution, and an indicator-variable proof of the expectation.",
@@ -81,7 +81,7 @@
         "source": "paper-en-revised.tex"
       },
       {
-        "number": "III / III",
+        "number": "03 / 03",
         "language": "中文 · 修订版",
         "lang": "zh-Hans",
         "title": "中文修订报告",
@@ -105,6 +105,74 @@
         "url": "https://www.bilibili.com/video/BV1Fh411N71S",
         "linkLabel": "Bilibili video BV1Fh411N71S"
       }
+    }
+  },
+  {
+    "number": "002",
+    "slug": "name-phonology",
+    "category": "Linguistics",
+    "kind": "Essay",
+    "lang": "en",
+    "title": "One Name, Two Sound Systems",
+    "subtitle": {
+      "text": "同一個名字，兩套聲音",
+      "lang": "zh-Hant"
+    },
+    "summary": "The phonology of personal names in Chinese and Japanese: Mandarin tones and finals, Japanese morae and pitch accent, and the patterns we learn to hear.",
+    "motif": {
+      "left": "音",
+      "arrow": "↔",
+      "right": "拍"
+    },
+    "cardActions": [
+      {
+        "label": "Read bilingual essay",
+        "kind": "primary",
+        "href": ""
+      }
+    ],
+    "metaDescription": "A bilingual essay on the phonology of personal names in Chinese and Japanese, illustrated with familiar names from anime, games, and related media.",
+    "deck": "The phonology of personal names in Chinese and Japanese: what changes when the same familiar name is spoken in another language?",
+    "publicationActions": [
+      {
+        "label": "English Markdown",
+        "kind": "secondary",
+        "href": "article-en.md"
+      },
+      {
+        "label": "中文 Markdown",
+        "lang": "zh-Hant",
+        "kind": "secondary",
+        "href": "article-zh.md"
+      }
+    ],
+    "facts": [
+      {
+        "label": "Collection",
+        "value": "萬象, no. 002"
+      },
+      {
+        "label": "Languages",
+        "value": "English · 繁體中文"
+      },
+      {
+        "label": "Formats",
+        "value": "HTML · Markdown source"
+      }
+    ],
+    "article": {
+      "languages": [
+        {
+          "lang": "en",
+          "label": "English",
+          "source": "article-en.md"
+        },
+        {
+          "lang": "zh-Hant",
+          "label": "中文",
+          "source": "article-zh.md"
+        }
+      ]
     }
   }
 ]

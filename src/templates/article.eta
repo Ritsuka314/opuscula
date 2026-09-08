@@ -1,0 +1,56 @@
+<% layout("./base") -%>
+  <main class="article-main" data-bilingual-article data-reading-mode="all">
+    <nav class="breadcrumbs" aria-label="Breadcrumb">
+      <a href="../" lang="zh-Hant"><%= it.site.name %></a><span aria-hidden="true">/</span>Writing <%= it.writing.number %>
+    </nav>
+
+    <article>
+      <header class="essay-header">
+        <p class="publication-meta"><%= it.writing.number %> / <%= it.writing.category %> / <%= it.writing.kind %></p>
+        <h1><%= it.writing.title %></h1>
+<% if (it.writing.subtitle) { -%>
+        <p class="essay-subtitle" lang="<%= it.writing.subtitle.lang %>"><%= it.writing.subtitle.text %></p>
+<% } -%>
+        <p class="essay-deck"><%= it.writing.deck %></p>
+        <p class="essay-byline"><%= it.site.owner %> <span aria-hidden="true">/</span> <span lang="zh-Hant"><%= it.site.ownerCjk %></span></p>
+      </header>
+
+      <div class="reading-controls" hidden role="group" aria-label="Reading language / 閱讀語言">
+        <span class="reading-label" aria-hidden="true">Read / 閱讀</span>
+        <button type="button" data-reading="all" aria-pressed="true">English + 中文</button>
+<% it.article.languages.forEach((language) => { -%>
+        <button type="button" data-reading="<%= language.lang %>" aria-pressed="false" lang="<%= language.lang %>"><%= language.label %></button>
+<% }) -%>
+      </div>
+
+      <details class="article-contents" id="contents">
+        <summary>Contents <span lang="zh-Hant">目次</span></summary>
+        <ol>
+<% it.article.sections.forEach((section) => { -%>
+          <li><a href="#<%= section.id %>"><% section.translations.forEach((translation) => { %><span class="article-language" lang="<%= translation.lang %>"><%= translation.title %></span><% }) %></a></li>
+<% }) -%>
+        </ol>
+      </details>
+
+      <div class="article-sections">
+<% it.article.sections.forEach((section, sectionIndex) => { -%>
+        <section class="bilingual-section" id="<%= section.id %>" aria-label="<%= section.translations.map((translation) => translation.title).join(' / ') %>">
+<% section.translations.forEach((translation) => { -%>
+          <div class="article-language article-prose" lang="<%= translation.lang %>">
+            <p class="section-language"><span aria-hidden="true"><%= String(sectionIndex + 1).padStart(2, '0') %> / </span><%= translation.label %></p>
+            <h2><%= translation.title %></h2>
+            <%~ translation.html %>
+          </div>
+<% }) -%>
+        </section>
+<% }) -%>
+      </div>
+
+      <footer class="essay-sources">
+        <p>Markdown sources <span lang="zh-Hant">原文檔案</span></p>
+<% it.article.languages.forEach((language) => { -%>
+        <a href="<%= language.source %>" lang="<%= language.lang %>"><%= language.label %></a>
+<% }) -%>
+      </footer>
+    </article>
+  </main>

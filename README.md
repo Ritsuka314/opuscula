@@ -1,9 +1,9 @@
-# Opuscula
+# 萬象 (Opuscula)
 
-Recreational and semi-formal writings by K. Ritsuka, published at
+A journal of myriad phenomena by Hoshikawa Miyu, published at
 [opuscula.ritsuka.moe](https://opuscula.ritsuka.moe/).
 
-This repository contains the complete standalone Opuscula site: sources,
+This repository contains the complete standalone 萬象 site: sources,
 compiled documents, publication notes, and web pages. Each writing occupies
 one directory, while the repository root supplies the collection catalogue
 and shared site assets.
@@ -16,7 +16,7 @@ consistent as the collection grows.
 
 ## Building
 
-The site generator requires Node.js 20 or later. Install its pinned dependency
+The site generator requires Node.js 20 or later. Install its pinned dependencies
 once:
 
 ```sh
@@ -44,12 +44,14 @@ README for its exact commands and prerequisites.
 
 ## Adding a writing
 
-1. Create a URL-safe directory for the writing and give it a Makefile.
+1. Create a URL-safe directory for the writing. PDF documents need a Makefile;
+   web essays use Markdown sources and do not need LaTeX.
 2. Add one record, in numerical order, to
    [`src/data/writings.json`](src/data/writings.json). Its `slug` must match
    the directory name.
-3. Run `make`. The generator checks that referenced PDFs and LaTeX sources
-   exist, then regenerates the root catalogue and every publication page.
+3. Run `make` for documents or `npm run build` for web essays. The generator
+   checks referenced sources and documents, then regenerates the root catalogue
+   and every publication page.
 4. Review and commit the source, documents, and generated HTML together.
 
 Edit [`src/data/site.json`](src/data/site.json) for collection-wide prose,
@@ -60,3 +62,17 @@ files and should not be edited directly.
 GitHub Pages serves the committed output without a server-side build. The
 `.nojekyll` and `CNAME` files select static publishing and the
 `opuscula.ritsuka.moe` custom domain.
+
+## Bilingual web essays
+
+A writing with an `article.languages` array renders both Markdown sources into
+one page through `src/templates/article.eta`. Each language record supplies
+`lang`, `label`, and `source`; PDF-only edition and editorial fields are not
+needed. See [name-phonology/README.md](name-phonology/README.md) for the section
+markers that keep translations aligned.
+
+Readers can show both languages or either language alone. Links such as
+`name-phonology/?lang=en#tones` and `name-phonology/?lang=zh-Hant#tones` preserve
+the reading choice and section. The page includes both languages in static
+HTML, so JavaScript is optional. Layout and print styles live in
+`assets/article.css`; `assets/article.js` only controls language visibility.
