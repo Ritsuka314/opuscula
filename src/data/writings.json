@@ -174,5 +174,73 @@
         }
       ]
     }
+  },
+  {
+    "number": "003",
+    "slug": "which-way-is-forward",
+    "category": "Linguistics",
+    "kind": "Essay",
+    "lang": "en",
+    "title": "Which Way Is Forward?",
+    "subtitle": {
+      "text": "向前，怎麼到了後面？",
+      "lang": "zh-Hant"
+    },
+    "summary": "Why fast-forwarding takes us to a later passage, a place an hour ahead reaches nine earlier, and a browser's Forward button returns us to somewhere we have already been.",
+    "motif": {
+      "left": "前",
+      "arrow": "↔",
+      "right": "後"
+    },
+    "cardActions": [
+      {
+        "label": "Read bilingual essay",
+        "kind": "primary",
+        "href": ""
+      }
+    ],
+    "metaDescription": "A bilingual essay on Mandarin 前／後 and the directions we give time, through meetings, time zones, fast watches, prequels, and browser history.",
+    "deck": "Fast-forward to the later part. Look back at what came before. A small puzzle in Mandarin opens onto the many directions we give time.",
+    "publicationActions": [
+      {
+        "label": "English Markdown",
+        "kind": "secondary",
+        "href": "article-en.md"
+      },
+      {
+        "label": "中文 Markdown",
+        "lang": "zh-Hant",
+        "kind": "secondary",
+        "href": "article-zh.md"
+      }
+    ],
+    "facts": [
+      {
+        "label": "Collection",
+        "value": "萬象, no. 003"
+      },
+      {
+        "label": "Languages",
+        "value": "English · 繁體中文"
+      },
+      {
+        "label": "Formats",
+        "value": "HTML · Markdown source"
+      }
+    ],
+    "article": {
+      "languages": [
+        {
+          "lang": "en",
+          "label": "English",
+          "source": "article-en.md"
+        },
+        {
+          "lang": "zh-Hant",
+          "label": "中文",
+          "source": "article-zh.md"
+        }
+      ]
+    }
   }
 ]
